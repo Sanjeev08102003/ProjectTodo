@@ -77,10 +77,10 @@
   
 </body>
 <script>
-const todoList = [
+const todoList = (JSON.parse(localStorage.getItem('todoList'))) || [
   {
-    name : "Default ToDo",
-    date : "Default Date"
+    name : "",
+    date : ""
   }
 ];
 
@@ -106,6 +106,10 @@ function displayToDo(){
       <button onclick = "
       todoList.splice(${i} , 1);
       displayToDo();
+
+      //SAVING REMAINING DATA TO LOCAL STORAGE AFTER DELETING
+      SaveToDo();
+
       " class="delete-button" >Delete</button>
     `;
 
@@ -123,7 +127,13 @@ function addToDo(){
   //Get the values from HTMl Elements and store them in a variable.
   const inputToDo = document.querySelector('.inputToDo').value
   const inputDate = document.querySelector('.inputDate').value
-
+  if(inputToDo === ""){
+    alert("Please Enter Your Todo")
+  }
+  else if(inputDate === ""){
+    alert("Please Enter Your Due Date")
+  }
+  else{
   // Add the values in the array of object.
   todoList.push({
     name : inputToDo,
@@ -135,6 +145,14 @@ function addToDo(){
   document.querySelector('.inputDate').value = "";
   displayToDo();
 
+  //SAVING DATA TO LOCAL STORAGE AFTER DISPLAYING IT 
+  SaveToDo();
+  }
+}
+
+
+function SaveToDo(){
+  localStorage.setItem( 'todoList' , JSON.stringify(todoList))
 }
 
 </script>
