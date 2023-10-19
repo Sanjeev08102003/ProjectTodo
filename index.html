@@ -77,7 +77,7 @@
   
 </body>
 <script>
-const todoList = (JSON.parse(localStorage.getItem('todoList'))) || [
+const todoList = [
   {
     name : "",
     date : ""
@@ -106,10 +106,6 @@ function displayToDo(){
       <button onclick = "
       todoList.splice(${i} , 1);
       displayToDo();
-
-      //SAVING REMAINING DATA TO LOCAL STORAGE AFTER DELETING
-      SaveToDo();
-
       " class="delete-button" >Delete</button>
     `;
 
@@ -139,14 +135,8 @@ function addToDo(){
   document.querySelector('.inputDate').value = "";
   displayToDo();
 
-  //SAVING DATA TO LOCAL STORAGE AFTER DISPLAYING IT 
-  SaveToDo();
 }
 
-
-function SaveToDo(){
-  localStorage.setItem( 'todoList' , JSON.stringify(todoList))
-}
 
 </script>
 </html>
